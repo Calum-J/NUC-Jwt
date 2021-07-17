@@ -11,10 +11,68 @@
  
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		function Insurance(){
+			var wages = document.getElementById("salary").value;//取到用户输入的工资数值
+			var wagesnum = parseInt(wages);//将字符串转换为数字
+			//开始计算！！！
+			//1. 养老
+			var ylgrz = 0.08;//养老个人8%
+			var ylgsz = 0.2;//养老公司20%
+			var ylgrj = wagesnum * ylgrz//养老个人需交			
+			var ylgsj = wagesnum * ylgsz//养老公司需交
+			document.getElementById("ylgr").value = ylgrj;
+			document.getElementById("ylgs").value = ylgsj;
+			
+			//2. 医疗
+			var YLgrz = 0.02;//医疗个人2%
+			var YLgsz = 0.06;//医疗公司6%
+			var YLgrj = wagesnum * YLgrz;//医疗个人需交
+			var YLgsj = wagesnum * YLgsz;//医疗公司需交
+			document.getElementById("YLgr").value = YLgrj;
+			document.getElementById("YLgs").value = YLgsj;
+			
+			//3. 失业
+			var sygrz = 0.005;//失业保险个人0.5%
+			var sygsz = 0.015;//失业保险公司1.5%
+			var sygrj = wagesnum * sygrz;//失业保险个人需交
+			var sygsj = wagesnum * sygsz;//失业保险公司需交
+			document.getElementById("sygr").value = sygrj;
+			document.getElementById("sygs").value = sygsj;
+			
+			//4. 工伤
+			var gsgsz = 0.005;//工伤公司0.5%
+			var gsgsj = wagesnum * gsgsz;//工伤公司需交
+			document.getElementById("gsgs").value = gsgsj;
+			
+			//5. 生育
+			var SYgsz = 0.008;//生育公司0.8%
+			var SYgsj = wagesnum * SYgsz;//生育公司需交
+			document.getElementById("SYgs").value = SYgsj;
+			
+			//6. 公积金
+			var gjjgrz = 0.12;//公积金个人12%
+			var gjjgsz = 0.12;//公积金公司12%
+			var gjjgrj = wagesnum * gjjgrz;//公积金个人需交
+			var gjjgsj = wagesnum * gjjgsz;//公积金公司需交
+			document.getElementById("gjjgr").value = gjjgrj;
+			document.getElementById("gjjgs").value = gjjgsj;
+			
+			//7. 合计
+			var grtotal = ylgrj + YLgrj + sygrj + gjjgrj;
+			var gstotal = ylgsj + YLgsj + sygsj + gsgsj + SYgsj + gjjgsj;			
+			document.getElementById("grtotal").value = grtotal;
+			document.getElementById("gstotal").value = gstotal;
+			
+			//8. 总额
+			var total = wagesnum + grtotal + gstotal;
+			document.getElementById("total").value = total;
+		}
+	</script>
 	</head>
 	<body>
 		<div class="container text-center">
-			<img src="nuclogored.jpg" class="img-circle" width="100px" height="100px">
+			<img src="images/nuclogored.jpg" class="img-circle" width="100px" height="100px">
 			<table class="table table-bordered text-center table-striped">
 				<tr>
 					<td>工资</td>
@@ -22,7 +80,7 @@
 						<input type="text" id="salary" placeholder="请输入工资" class="form-control">
 					</td>
 					<td>
-						<button class="btn btn-danger btn-block">计算</button>
+						<button onclick="Insurance()" class="btn btn-danger btn-block">计算</button>
 					</td>
 				</tr>
 				<tr class="bg-primary">
@@ -35,55 +93,81 @@
 				<tr>
 					<td>养老</td>
 					<td>8%</td>
-					<td></td>
+					<td>
+						<input type="text" id="ylgr" class="form-control text-center" readonly="readonly">
+					</td>
 					<td>20%</td>
-					<td></td>
+					<td>
+						<input type="text" id="ylgs" class="form-control text-center" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<td>医疗</td>
 					<td>2%</td>
-					<td></td>
+					<td>
+						<input type="text" id="YLgr" class="form-control text-center" readonly="readonly">
+					</td>
 					<td>6%</td>
-					<td></td>
+					<td>
+						<input type="text" id="YLgs" class="form-control text-center" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<td>失业保险</td>
 					<td>0.5%</td>
-					<td></td>
+					<td>
+						<input type="text" id="sygr" class="form-control text-center" readonly="readonly">
+					</td>
 					<td>1.5%</td>
-					<td></td>
+					<td>
+						<input type="text" id="sygs" class="form-control text-center" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<td>工伤</td>
 					<td></td>
 					<td></td>
 					<td>0.5%</td>
-					<td></td>
+					<td>
+						<input type="text" id="gsgs" class="form-control text-center" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<td>生育</td>
 					<td></td>
 					<td></td>
 					<td>0.8%</td>
-					<td></td>
+					<td>
+						<input type="text" id="SYgs" class="form-control text-center" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<td>公积金</td>
 					<td>12%</td>
-					<td></td>
+					<td>
+						<input type="text" id="gjjgr" class="form-control text-center" readonly="readonly">
+					</td>
 					<td>12%</td>
-					<td></td>
+					<td>
+						<input type="text" id="gjjgs" class="form-control text-center" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<td>合计</td>
 					<td>个人合计</td>
-					<td></td>
+					<td>
+						<input type="text" id="grtotal" class="form-control text-center" readonly="readonly">
+					</td>
 					<td>公司合计</td>
-					<td></td>
+					<td>
+						<input type="text" id="gstotal" class="form-control text-center" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<td>总额</td>
-					<td colspan="4"></td>
+					<td colspan="4">
+						<input type="text" id="total" class="form-control text-center" readonly="readonly">
+					</td>
 				</tr>
 			</table>
 			开发者：2013041446 贾文涛 中北大学软件学院小学期实训  执行单位：英才科技
